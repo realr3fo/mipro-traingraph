@@ -1,0 +1,31 @@
+# Maven
+target/
+
+# Spring Boot
+build/
+!dist/
+!dist/application.jar
+!dist/application.war
+!dist/application.zip
+!dist/application.tar.gz
+
+# IDE files
+.idea/
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Application properties
+src/main/resources/application.properties
+
+# Compiled Java class files
+*.class
