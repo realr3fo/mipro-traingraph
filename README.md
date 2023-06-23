@@ -50,3 +50,7 @@ Before running the application, make sure you have the following prerequisites i
 - Thymeleaf
 - Maven
 - HTML/CSS/JavaScript
+
+
+## Snippet
+![Current progress on the FE part](WIP-FE.png)
