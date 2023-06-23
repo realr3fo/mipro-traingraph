@@ -3,6 +3,11 @@ package com.mipro.traingraph.model;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Train {
     private long trainNumber;
     private String departureDate;
@@ -18,7 +23,6 @@ public class Train {
     private String timetableType;
     private String timetableAcceptanceDate;
     private List<TimeTableRow> timeTableRows;
-    private TrainReady trainReady;
 
     // Getters and setters
 
@@ -28,7 +32,7 @@ public class Train {
     public Train(long trainNumber, String departureDate, int operatorUICCode, String operatorShortCode,
             String trainType, String trainCategory, String commuterLineID, boolean runningCurrently, boolean cancelled,
             boolean deleted, long version, String timetableType, String timetableAcceptanceDate,
-            List<TimeTableRow> timeTableRows, TrainReady trainReady) {
+            List<TimeTableRow> timeTableRows) {
         this.trainNumber = trainNumber;
         this.departureDate = departureDate;
         this.operatorUICCode = operatorUICCode;
@@ -43,7 +47,6 @@ public class Train {
         this.timetableType = timetableType;
         this.timetableAcceptanceDate = timetableAcceptanceDate;
         this.timeTableRows = timeTableRows;
-        this.trainReady = trainReady;
     }
 
     public long getTrainNumber() {
@@ -170,14 +173,6 @@ public class Train {
         this.timeTableRows = timeTableRows;
     }
 
-    public TrainReady getTrainReady() {
-        return this.trainReady;
-    }
-
-    public void setTrainReady(TrainReady trainReady) {
-        this.trainReady = trainReady;
-    }
-
     public Train trainNumber(long trainNumber) {
         setTrainNumber(trainNumber);
         return this;
@@ -248,11 +243,6 @@ public class Train {
         return this;
     }
 
-    public Train trainReady(TrainReady trainReady) {
-        setTrainReady(trainReady);
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -269,14 +259,14 @@ public class Train {
                 && cancelled == train.cancelled && deleted == train.deleted && version == train.version
                 && Objects.equals(timetableType, train.timetableType)
                 && Objects.equals(timetableAcceptanceDate, train.timetableAcceptanceDate)
-                && Objects.equals(timeTableRows, train.timeTableRows) && Objects.equals(trainReady, train.trainReady);
+                && Objects.equals(timeTableRows, train.timeTableRows);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(trainNumber, departureDate, operatorUICCode, operatorShortCode, trainType, trainCategory,
                 commuterLineID, runningCurrently, cancelled, deleted, version, timetableType, timetableAcceptanceDate,
-                timeTableRows, trainReady);
+                timeTableRows);
     }
 
     @Override
@@ -296,7 +286,6 @@ public class Train {
                 ", timetableType='" + getTimetableType() + "'" +
                 ", timetableAcceptanceDate='" + getTimetableAcceptanceDate() + "'" +
                 ", timeTableRows='" + getTimeTableRows() + "'" +
-                ", trainReady='" + getTrainReady() + "'" +
                 "}";
     }
 

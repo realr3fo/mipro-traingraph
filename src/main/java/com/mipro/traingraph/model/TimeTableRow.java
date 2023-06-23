@@ -3,6 +3,11 @@ package com.mipro.traingraph.model;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TimeTableRow {
     private String stationShortCode;
     private int stationUICCode;
@@ -19,6 +24,7 @@ public class TimeTableRow {
     private String actualTime;
     private long differenceInMinutes;
     private List<Cause> causes;
+    private TrainReady trainReady;
 
     //
 
@@ -44,6 +50,41 @@ public class TimeTableRow {
         this.actualTime = actualTime;
         this.differenceInMinutes = differenceInMinutes;
         this.causes = causes;
+    }
+
+    public TimeTableRow(String stationShortCode, int stationUICCode, String countryCode, String type,
+            boolean trainStopping, boolean commercialStop, String commercialTrack, boolean cancelled,
+            String scheduledTime, String liveEstimateTime, String estimateSource, boolean unknownDelay,
+            String actualTime, long differenceInMinutes, List<Cause> causes, TrainReady trainReady) {
+        this.stationShortCode = stationShortCode;
+        this.stationUICCode = stationUICCode;
+        this.countryCode = countryCode;
+        this.type = type;
+        this.trainStopping = trainStopping;
+        this.commercialStop = commercialStop;
+        this.commercialTrack = commercialTrack;
+        this.cancelled = cancelled;
+        this.scheduledTime = scheduledTime;
+        this.liveEstimateTime = liveEstimateTime;
+        this.estimateSource = estimateSource;
+        this.unknownDelay = unknownDelay;
+        this.actualTime = actualTime;
+        this.differenceInMinutes = differenceInMinutes;
+        this.causes = causes;
+        this.trainReady = trainReady;
+    }
+
+    public TrainReady getTrainReady() {
+        return this.trainReady;
+    }
+
+    public void setTrainReady(TrainReady trainReady) {
+        this.trainReady = trainReady;
+    }
+
+    public TimeTableRow trainReady(TrainReady trainReady) {
+        setTrainReady(trainReady);
+        return this;
     }
 
     public String getStationShortCode() {

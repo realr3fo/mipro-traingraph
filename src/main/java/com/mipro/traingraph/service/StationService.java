@@ -21,10 +21,8 @@ import com.mipro.traingraph.provider.StationNameProvider;
 
 @Service
 public class StationService {
-    private final RestTemplate restTemplate;
-
     public StationService() {
-        this.restTemplate = new RestTemplate();
+        new RestTemplate();
     }
 
     /**
@@ -56,7 +54,6 @@ public class StationService {
         // Print the response for debugging purposes
         // System.out.println(response.toString());
         List<String> stationNames = new StationNameProvider().getStationNames();
-        System.out.println(stationNames.toString());
 
         List<Station> stations = response.getBody().stream()
                 .map(metadata -> new Station(metadata.getStationName(), metadata.getStationShortCode(),
@@ -66,7 +63,6 @@ public class StationService {
         List<Station> filteredStations = stations.stream()
                 .filter(station -> stationNames.contains(station.getStationName()))
                 .collect(Collectors.toList());
-        // System.out.println(filteredStations.toString());
 
         // Handle the response
         if (response.getStatusCode().is2xxSuccessful()) {
@@ -75,5 +71,15 @@ public class StationService {
             // Handle error case
             return Collections.emptyList();
         }
+    }
+
+    public List<String> fetchStationCodes() throws IOException {
+        List<Station> stations = fetchStationMetadata();
+
+        List<String> stationCodes = stations.stream()
+                .map(Station::getStationShortCode)
+                .collect(Collectors.toList());
+
+        return stationCodes;
     }
 }

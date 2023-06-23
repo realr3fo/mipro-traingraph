@@ -3,31 +3,37 @@ package com.mipro.traingraph.model;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cause {
     private String description;
     private PassengerTerm passengerTerm;
-    private List<String> categoryCode;
-    private List<String> categoryName;
-    private List<String> validFrom;
-    private List<String> validTo;
-    private List<String> id;
-    private List<String> detailedCategoryCode;
-    private List<String> detailedCategoryName;
-    private List<String> thirdCategoryCode;
-    private List<String> thirdCategoryName;
-    private List<String> categoryCodeId;
-    private List<String> thirdCategoryCodeId;
-    private List<String> detailedCategoryCodeId;
+    private String categoryCode;
+    private String categoryName;
+    private String validFrom;
+    private String validTo;
+    private Integer id;
+    private String detailedCategoryCode;
+    private String detailedCategoryName;
+    private String thirdCategoryCode;
+    private String thirdCategoryName;
+    private Integer categoryCodeId;
+    private Integer thirdCategoryCodeId;
+    private Integer detailedCategoryCodeId;
 
     // Getters and setters
 
     public Cause() {
     }
 
-    public Cause(String description, PassengerTerm passengerTerm, List<String> categoryCode, List<String> categoryName,
-            List<String> validFrom, List<String> validTo, List<String> id, List<String> detailedCategoryCode,
-            List<String> detailedCategoryName, List<String> thirdCategoryCode, List<String> thirdCategoryName,
-            List<String> categoryCodeId, List<String> thirdCategoryCodeId, List<String> detailedCategoryCodeId) {
+    public Cause(String description, PassengerTerm passengerTerm, String categoryCode, String categoryName,
+            String validFrom, String validTo, Integer id, String detailedCategoryCode, String detailedCategoryName,
+            String thirdCategoryCode, String thirdCategoryName, Integer categoryCodeId, Integer thirdCategoryCodeId,
+            Integer detailedCategoryCodeId) {
         this.description = description;
         this.passengerTerm = passengerTerm;
         this.categoryCode = categoryCode;
@@ -60,99 +66,99 @@ public class Cause {
         this.passengerTerm = passengerTerm;
     }
 
-    public List<String> getCategoryCode() {
+    public String getCategoryCode() {
         return this.categoryCode;
     }
 
-    public void setCategoryCode(List<String> categoryCode) {
+    public void setCategoryCode(String categoryCode) {
         this.categoryCode = categoryCode;
     }
 
-    public List<String> getCategoryName() {
+    public String getCategoryName() {
         return this.categoryName;
     }
 
-    public void setCategoryName(List<String> categoryName) {
+    public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public List<String> getValidFrom() {
+    public String getValidFrom() {
         return this.validFrom;
     }
 
-    public void setValidFrom(List<String> validFrom) {
+    public void setValidFrom(String validFrom) {
         this.validFrom = validFrom;
     }
 
-    public List<String> getValidTo() {
+    public String getValidTo() {
         return this.validTo;
     }
 
-    public void setValidTo(List<String> validTo) {
+    public void setValidTo(String validTo) {
         this.validTo = validTo;
     }
 
-    public List<String> getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(List<String> id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public List<String> getDetailedCategoryCode() {
+    public String getDetailedCategoryCode() {
         return this.detailedCategoryCode;
     }
 
-    public void setDetailedCategoryCode(List<String> detailedCategoryCode) {
+    public void setDetailedCategoryCode(String detailedCategoryCode) {
         this.detailedCategoryCode = detailedCategoryCode;
     }
 
-    public List<String> getDetailedCategoryName() {
+    public String getDetailedCategoryName() {
         return this.detailedCategoryName;
     }
 
-    public void setDetailedCategoryName(List<String> detailedCategoryName) {
+    public void setDetailedCategoryName(String detailedCategoryName) {
         this.detailedCategoryName = detailedCategoryName;
     }
 
-    public List<String> getThirdCategoryCode() {
+    public String getThirdCategoryCode() {
         return this.thirdCategoryCode;
     }
 
-    public void setThirdCategoryCode(List<String> thirdCategoryCode) {
+    public void setThirdCategoryCode(String thirdCategoryCode) {
         this.thirdCategoryCode = thirdCategoryCode;
     }
 
-    public List<String> getThirdCategoryName() {
+    public String getThirdCategoryName() {
         return this.thirdCategoryName;
     }
 
-    public void setThirdCategoryName(List<String> thirdCategoryName) {
+    public void setThirdCategoryName(String thirdCategoryName) {
         this.thirdCategoryName = thirdCategoryName;
     }
 
-    public List<String> getCategoryCodeId() {
+    public Integer getCategoryCodeId() {
         return this.categoryCodeId;
     }
 
-    public void setCategoryCodeId(List<String> categoryCodeId) {
+    public void setCategoryCodeId(Integer categoryCodeId) {
         this.categoryCodeId = categoryCodeId;
     }
 
-    public List<String> getThirdCategoryCodeId() {
+    public Integer getThirdCategoryCodeId() {
         return this.thirdCategoryCodeId;
     }
 
-    public void setThirdCategoryCodeId(List<String> thirdCategoryCodeId) {
+    public void setThirdCategoryCodeId(Integer thirdCategoryCodeId) {
         this.thirdCategoryCodeId = thirdCategoryCodeId;
     }
 
-    public List<String> getDetailedCategoryCodeId() {
+    public Integer getDetailedCategoryCodeId() {
         return this.detailedCategoryCodeId;
     }
 
-    public void setDetailedCategoryCodeId(List<String> detailedCategoryCodeId) {
+    public void setDetailedCategoryCodeId(Integer detailedCategoryCodeId) {
         this.detailedCategoryCodeId = detailedCategoryCodeId;
     }
 
@@ -166,62 +172,62 @@ public class Cause {
         return this;
     }
 
-    public Cause categoryCode(List<String> categoryCode) {
+    public Cause categoryCode(String categoryCode) {
         setCategoryCode(categoryCode);
         return this;
     }
 
-    public Cause categoryName(List<String> categoryName) {
+    public Cause categoryName(String categoryName) {
         setCategoryName(categoryName);
         return this;
     }
 
-    public Cause validFrom(List<String> validFrom) {
+    public Cause validFrom(String validFrom) {
         setValidFrom(validFrom);
         return this;
     }
 
-    public Cause validTo(List<String> validTo) {
+    public Cause validTo(String validTo) {
         setValidTo(validTo);
         return this;
     }
 
-    public Cause id(List<String> id) {
+    public Cause id(Integer id) {
         setId(id);
         return this;
     }
 
-    public Cause detailedCategoryCode(List<String> detailedCategoryCode) {
+    public Cause detailedCategoryCode(String detailedCategoryCode) {
         setDetailedCategoryCode(detailedCategoryCode);
         return this;
     }
 
-    public Cause detailedCategoryName(List<String> detailedCategoryName) {
+    public Cause detailedCategoryName(String detailedCategoryName) {
         setDetailedCategoryName(detailedCategoryName);
         return this;
     }
 
-    public Cause thirdCategoryCode(List<String> thirdCategoryCode) {
+    public Cause thirdCategoryCode(String thirdCategoryCode) {
         setThirdCategoryCode(thirdCategoryCode);
         return this;
     }
 
-    public Cause thirdCategoryName(List<String> thirdCategoryName) {
+    public Cause thirdCategoryName(String thirdCategoryName) {
         setThirdCategoryName(thirdCategoryName);
         return this;
     }
 
-    public Cause categoryCodeId(List<String> categoryCodeId) {
+    public Cause categoryCodeId(Integer categoryCodeId) {
         setCategoryCodeId(categoryCodeId);
         return this;
     }
 
-    public Cause thirdCategoryCodeId(List<String> thirdCategoryCodeId) {
+    public Cause thirdCategoryCodeId(Integer thirdCategoryCodeId) {
         setThirdCategoryCodeId(thirdCategoryCodeId);
         return this;
     }
 
-    public Cause detailedCategoryCodeId(List<String> detailedCategoryCodeId) {
+    public Cause detailedCategoryCodeId(Integer detailedCategoryCodeId) {
         setDetailedCategoryCodeId(detailedCategoryCodeId);
         return this;
     }
@@ -272,5 +278,4 @@ public class Cause {
                 ", detailedCategoryCodeId='" + getDetailedCategoryCodeId() + "'" +
                 "}";
     }
-
 }
