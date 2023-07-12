@@ -15,7 +15,29 @@
     </div>
 
     <script>
-        var chart;
+        function fillNullValues(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] === null) {
+                    var start = i - 1;
+                    while (arr[i] === null) {
+                        i++;
+                    }
+                    var end = i;
+                    var startValue = arr[start];
+                    var endValue = arr[end];
+                    var diff = (endValue - startValue) / (end - start);
+
+                    for (var j = start + 1; j < end; j++) {
+                        arr[j] = startValue + diff * (j - start);
+                    }
+                }
+            }
+
+            return arr;
+        }
+
+
+        var ctx = document.getElementById("trainGraph").getContext("2d");
 
 
         function renderChart() {
@@ -46,21 +68,17 @@
             for (var time = startTime; time <= endTime; time = new Date(time.getTime() + interval)) {
                 var hours = time.getHours().toString().padStart(2, '0');
                 var minutes = time.getMinutes().toString().padStart(2, '0');
-                var seconds = time.getSeconds().toString().padStart(2, '0');
-                var formattedTime = hours + ':' + minutes + ':' + seconds;
+                var formattedTime = hours + ':' + minutes;
                 timeLabels.push(formattedTime);
             }
 
-            console.log(timeLabels);
-
-
-
             // Destroy the existing Chart instance if it exists
-            if (chart) {
-                chart.destroy();
-            }
+            // if (chart) {
+            //     chart.destroy();
+            // }
+
             const totalDuration = timeLabels.length;
-            const delayBetweenPoints = 50;
+            const delayBetweenPoints = 30;
             const previousY = 0;
             const animation = {
                 x: {
@@ -90,63 +108,14 @@
                     }
                 }
             };
-            var ctx = document.getElementById("trainGraph").getContext("2d");
-            chart = new Chart(ctx, {
+
+
+            const chartData = {
                 plugins: [ChartDataLabels],
                 type: "line",
                 data: {
                     labels: timeLabels, //x axis
-                    datasets: [
-                        {
-                            label: "8063", // train numbers
-                            // data: [null, null, 0.2, null, null, 3.2, 3.2, null, 4.4, 4.4, 4.7, null, 6.4, 6.4, null, 7.5, 7.5, null, 8.5, null, 9.5, null, 11.2],
-                            data: [null, null, 0.2, 1.2, 2.2, 3.2, 3.2, 3.8, 4.4, 4.4, 4.7, 5.55, 6.4, 6.4, 6.9, 7.5, 7.5, 8.0, 8.5, 8.5, 9.5, 10.35, 11.2],
-                            // backgroundColor: "rgba(75, 192, 192, 0.2)",
-                            borderColor: "black",
-                            borderWidth: 1,
-                            animation: true,
-                            pointRadius: 0,
-                            pointHoverRadius: 0,
-                            hoverBorderWidth: 3,
-                            originalBorderWidth: 1,
-                            datalabels: {
-                                display: false,
-                            }
-                        },
-                        {
-                            label: "8066", // train numbers
-                            // data: [null, null, 0.2, null, null, 3.2, 3.2, null, 4.4, 4.4, 4.7, null, 6.4, 6.4, null, 7.5, 7.5, null, 8.5, null, 9.5, null, 11.2],
-                            data: [null, null, null, null, null, null, null, null, 0.2, 1.2, 2.2, 3.2, 3.2, 3.8, 4.4, 4.4, 4.7, 5.55, 6.4, 6.4, 6.9, 7.5, 7.5, 8.0, 8.5, 8.5, 9.5, 10.35, 11.2],
-                            // backgroundColor: "rgba(75, 192, 192, 0.2)",
-                            borderColor: "red",
-                            borderWidth: 1,
-                            animation: true,
-                            pointRadius: 2,
-                            pointHoverRadius: 2,
-                            hoverBorderWidth: 3,
-                            originalBorderWidth: 1,
-                            datalabels: {
-                                display: true,
-                            }
-                        },
-                        {
-                            label: "8063", // train numbers
-                            // data: [null, null, 0.2, null, null, 3.2, 3.2, null, 4.4, 4.4, 4.7, null, 6.4, 6.4, null, 7.5, 7.5, null, 8.5, null, 9.5, null, 11.2],
-                            data: [null, null, null, 0.2, 1.2, 2.2, 3.2, 3.2, 3.8, 4.4, 4.4, 4.7, 5.55, 6.4, 6.4, 6.9, 7.5, 7.5, 8.0, 8.5, 8.5, 9.5, 10.35, 11.2],
-                            // backgroundColor: "rgba(75, 192, 192, 0.2)",
-                            borderColor: "black",
-                            borderWidth: 2,
-                            animation: true,
-                            pointRadius: 2,
-                            pointHoverRadius: 2,
-                            hoverBorderWidth: 4,
-                            originalBorderWidth: 2,
-                            hoverBorderColor: 'black', // Set the border color on hover
-                            datalabels: {
-                                display: true,
-                            }
-                        },
-                    ]
+                    datasets: []
                 },
                 options: {
                     hover: {
@@ -167,7 +136,7 @@
                         });
                         context.chart.update('none'); // Update the chart to apply the changes
                     },
-                    animation,
+                    // animation,
                     showDatasetLabels: true,
                     plugins: {
                         legend: {
@@ -226,7 +195,7 @@
                             backgroundColor: 'white',
                             borderRadius: 4,
                             borderWidth: 1,
-                            borderColor: 'black',
+                            // borderColor: 'black',
                             anchor: 'end',
                             align: 'end',
                             offset: 4
@@ -276,13 +245,72 @@
                         }
                     }
                 }
-            });
-            console.log("hello")
+            };
+
+            return chartData;
         }
+
         // Render the initial chart
-        renderChart();
+        var chartData = renderChart();
+        var chart = new Chart(ctx, chartData);
+
+        function updateChart() {
+            // Make an API call using fetch()
+            fetch('http://localhost:8080/live-trains')
+                .then(response => response.json())
+                .then(data => {
+                    // Process the data returned by the API
+                    console.log(data);
+                    if (data.length == 0) {
+                        return
+                    }
+                    data.forEach(trainData => {
+                        const scheduledData = {
+                            label: trainData.trainNumber,
+                            data: fillNullValues(trainData.scheduledTimes),
+                            borderColor: trainData.trainColor,
+                            borderWidth: 1,
+                            // animation: true,
+                            pointRadius: 0,
+                            pointHoverRadius: 0,
+                            hoverBorderWidth: 3,
+                            originalBorderWidth: 1,
+                            datalabels: {
+                                display: false,
+                            }
+                        };
+                        const actualData = {
+                            label: trainData.trainNumber,
+                            data: fillNullValues(trainData.actualTimes),
+                            borderColor: trainData.trainColor,
+                            borderWidth: 2,
+                            // animation: true,
+                            pointRadius: 2,
+                            pointHoverRadius: 2,
+                            hoverBorderWidth: 4,
+                            originalBorderWidth: 2,
+                            hoverBorderColor: 'black', // Set the border color on hover
+                            datalabels: {
+                                display: true,
+                            }
+                        };
+                        chart.data.datasets.forEach((dataset) => {
+                            dataset.data.pop();
+                        });
+                        chart.data.datasets.push(scheduledData);
+                        chart.data.datasets.push(actualData);
+                        chart.update('none');
+                    });
+                })
+                .catch(error => {
+                    // Handle any errors that occurred during the API call
+                    console.error('Error:', error);
+                });
+            console.log("hello");
+        }
+        updateChart();
         // Reload the chart every 1 minute
-        setInterval(renderChart, 60000); // 60000 milliseconds = 1 minute
+        setInterval(updateChart, 60000); // 60000 milliseconds = 1 minute
 
         // Reset borderWidth values when mouse is outside the canvas
         var canvas = document.getElementById("trainGraph");

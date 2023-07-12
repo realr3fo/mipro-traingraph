@@ -29,7 +29,8 @@ public class TrainGraphController {
         model.addAttribute("stationNames", stationNames);
         model.addAttribute("distances", distances);
 
-        return "train-graph";
+        // return "train-graph";
+        return "train-graph-svg";
     }
 
     @GetMapping("/graph")

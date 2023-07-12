@@ -1,3 +1,42 @@
 h2 {
     color: green;
 }
+
+.station-line {
+    stroke: black;
+    stroke-width: 0.1mm;
+}
+
+svg {
+    font-family: "Open Sans", sans;
+    font-size: 13px;
+    min-width: 550px;
+    min-height: 500px;
+}
+
+.vertical-line {
+    stroke: #ccc;
+    stroke-width: 1px;
+}
+
+.hour-line {
+    stroke: black;
+    stroke-width: 0.3mm;
+}
+
+.ten-minute-line {
+    stroke: black;
+    stroke-width: 0.1mm;
+}
+
+.half-hour-line {
+    stroke: black;
+    stroke-width: 0.225mm;
+}
+
+.current-time {
+    stroke-width: 0.7mm;
+    stroke-linecap: round;
+    stroke: #0b0;
+    fill: none;
+}
