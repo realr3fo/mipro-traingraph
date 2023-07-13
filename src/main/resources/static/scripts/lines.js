@@ -22,7 +22,6 @@ export function drawLinesOnTime(drawLinesObject) {
 
   // Convert the points array to a flat array with alternating x and y values
   const flatPoints = points.flatMap(point => [point.x, point.y]);
-
   // Call drawPolyline with the generated points
   drawPolyline(flatPoints, drawLinesObject);
 }

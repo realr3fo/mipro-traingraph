@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mipro</groupId>
     <artifactId>mipro-traingraph</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -57,4 +57,42 @@
     </dependency>
 	</dependencies>
 
+	<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.2.0</version>
+      <configuration>
+        <archive>
+          <manifest>
+            <addClasspath>true</addClasspath>
+            <mainClass>com.mipro.traingraph.Main</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+	<plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <version>2.1.2.RELEASE</version>
+      <executions>
+        <execution>
+          <goals>
+            <goal>repackage</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+      <groupId>com.google.cloud.tools</groupId>
+      <artifactId>appengine-maven-plugin</artifactId>
+      <version>2.4.0</version>
+      <configuration>
+        <projectId>mpro-traingraph</projectId>
+        <version>1</version>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
 </project>

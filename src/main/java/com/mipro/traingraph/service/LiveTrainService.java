@@ -129,7 +129,10 @@ public class LiveTrainService {
 
     private List<CustomLiveTrain> filterTrains(List<Train> liveTrains) {
         List<CustomLiveTrain> filteredTrains = new ArrayList<>();
-        LocalDateTime currentTime = LocalDateTime.now();
+        ZoneId helsinkiZone = ZoneId.of("Europe/Helsinki");
+        ZonedDateTime currentTimeInHelsinki = ZonedDateTime.now(helsinkiZone);
+        LocalDateTime currentTime = currentTimeInHelsinki.toLocalDateTime();
+        // LocalDateTime currentTime = LocalDateTime.now();
         LocalDateTime thirtyMinutesAgo = currentTime.minus(30, ChronoUnit.MINUTES);
         LocalDateTime thirtyMinutesLater = currentTime.plus(30, ChronoUnit.MINUTES);
 
@@ -161,7 +164,7 @@ public class LiveTrainService {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                                 .withZone(ZoneOffset.UTC);
                         ZonedDateTime utcDateTime = ZonedDateTime.parse(scheduledTimeString, formatter);
-                        LocalDateTime scheduledTime = utcDateTime.withZoneSameInstant(ZoneId.systemDefault())
+                        LocalDateTime scheduledTime = utcDateTime.withZoneSameInstant(helsinkiZone)
                                 .toLocalDateTime();
 
                         if (scheduledTime.isAfter(thirtyMinutesAgo) && scheduledTime.isBefore(thirtyMinutesLater)) {
@@ -175,7 +178,7 @@ public class LiveTrainService {
                             continue;
                         }
                         ZonedDateTime utcDateActualTime = ZonedDateTime.parse(actualTimeString, formatter);
-                        LocalDateTime actualTime = utcDateActualTime.withZoneSameInstant(ZoneId.systemDefault())
+                        LocalDateTime actualTime = utcDateActualTime.withZoneSameInstant(helsinkiZone)
                                 .toLocalDateTime();
 
                         if (actualTime.isAfter(thirtyMinutesAgo) && actualTime.isBefore(thirtyMinutesLater)) {

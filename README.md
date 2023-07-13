@@ -53,4 +53,4 @@ Before running the application, make sure you have the following prerequisites i
 
 
 ## Snippet
-![Current progress on the FE part](WIP-FE.png)
+// TODO: add snippet
