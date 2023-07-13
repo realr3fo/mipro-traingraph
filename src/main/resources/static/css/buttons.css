@@ -1,0 +1,49 @@
+#button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px;
+}
+
+button#flip-grid-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button#source-code-button {
+    background-color: red;
+    color: white;
+}
+
+button#about-mipro-button {
+    background-color: #0074D9;
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button#flip-grid-button:hover {
+    background-color: #45a049;
+}
+
+button#source-code-button:hover {
+    background-color: #d32f2f;
+}
+
+button#about-mipro-button:hover {
+    background-color: #0066B2;
+}

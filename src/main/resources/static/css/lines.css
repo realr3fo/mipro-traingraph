@@ -1,0 +1,67 @@
+.station-line {
+    stroke: black;
+    stroke-width: 0.1mm;
+}
+
+.vertical-line {
+    stroke: #ccc;
+    stroke-width: 1px;
+}
+
+.hour-line {
+    stroke: black;
+    stroke-width: 0.3mm;
+}
+
+.ten-minute-line {
+    stroke: black;
+    stroke-width: 0.1mm;
+}
+
+.half-hour-line {
+    stroke: black;
+    stroke-width: 0.225mm;
+}
+
+.current-time {
+    stroke-width: 0.7mm;
+    stroke-linecap: round;
+    stroke: #0b0;
+    fill: none;
+}
+
+.train-line {
+    stroke-width: 0.3mm;
+    stroke-linecap: round;
+    cursor: pointer;
+    fill: none;
+}
+
+.train-line.thick {
+    stroke-width: 0.6mm;
+}
+
+.train-line:hover {
+    stroke-width: 0.6mm;
+}
+
+.train-line.thick:hover {
+    stroke-width: 1.2mm;
+}
+
+.train-line.highlighted {
+    stroke-width: 0.6mm;
+    opacity: 0.5;
+}
+
+.train-line.thick.highlighted {
+    stroke-width: 1.2mm;
+}
+
+.line-id-text {
+    font-size: 10px;
+}
+
+.highlighted-text {
+    font-size: 16px;
+}

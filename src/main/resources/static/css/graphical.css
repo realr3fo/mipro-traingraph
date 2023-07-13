@@ -1,0 +1,14 @@
+#svg-wrapper {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+svg {
+    font-family: "Open Sans", sans;
+    font-size: 13px;
+    min-width: 100%;
+    min-height: 100%;
+}

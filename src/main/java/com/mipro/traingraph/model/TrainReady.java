@@ -13,8 +13,6 @@ public class TrainReady {
     private boolean accepted;
     private String timestamp;
 
-    // Getters and setters
-
     public TrainReady() {
     }
 

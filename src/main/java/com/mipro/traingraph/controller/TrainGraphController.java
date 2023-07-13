@@ -12,31 +12,7 @@ public class TrainGraphController {
 
     @GetMapping("/trains")
     public String showTrainGraph(Model model) {
-        List<String> stationNames = Arrays.asList(
-                "Helsinki asema",
-                "Pasila asema",
-                "Ilmala asema",
-                "Helsinki Kivihaka",
-                "Huopalahti",
-                "Valimo",
-                "Pitäjänmäki",
-                "Mäkkylä",
-                "Leppävaara");
-        List<Integer> distances = Arrays.asList(
-                // Distances between stations in km
-                0, 5, 10, 15, 20, 25, 30, 35, 40);
-
-        model.addAttribute("stationNames", stationNames);
-        model.addAttribute("distances", distances);
-
-        // return "train-graph";
-        return "train-graph-svg";
-    }
-
-    @GetMapping("/graph")
-    public String showLineGraph(Model model) {
-
-        return "plot-lines";
+        return "train-graph";
     }
 
 }

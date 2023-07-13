@@ -7,12 +7,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class StationNameProvider {
+public class StationDataProvider {
     public List<String> getStationNames() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         // Load the JSON file as a resource stream
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/stationNames.json");
+
+        // Parse the JSON into a list of strings
+        List<String> stationNames = objectMapper.readValue(inputStream, new TypeReference<List<String>>() {
+        });
+
+        return stationNames;
+    }
+
+    public List<String> getStationCodes() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Load the JSON file as a resource stream
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/stationCodes.json");
 
         // Parse the JSON into a list of strings
         List<String> stationNames = objectMapper.readValue(inputStream, new TypeReference<List<String>>() {
