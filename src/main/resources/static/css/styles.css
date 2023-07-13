@@ -1,5 +1,79 @@
-h2 {
-    color: green;
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* Add gap between buttons */
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px;
+}
+
+button#flip-grid-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button#source-code-button {
+    background-color: red;
+    color: white;
+}
+
+button#about-mipro-button {
+    background-color: #0074D9;
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button#flip-grid-button:hover {
+    background-color: #45a049;
+}
+
+button#source-code-button:hover {
+    background-color: #d32f2f;
+}
+
+button#about-mipro-button:hover {
+    background-color: #0066B2;
+}
+
+#description-container {
+    font-family: "Open Sans", sans;
+    text-align: center;
+    font-size: 15px;
+    margin: 0;
+}
+
+#graphical-container {
+    margin-top: -30px;
+    width: 100%;
+    height: calc(100vh - 40px);
+    /* Change this line */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    box-sizing: border-box;
 }
 
 .station-line {
@@ -10,8 +84,23 @@ h2 {
 svg {
     font-family: "Open Sans", sans;
     font-size: 13px;
-    min-width: 550px;
-    min-height: 500px;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#svg-wrapper {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.flip-grid {
+    transform: rotate(90deg);
+    transform-origin: center;
+    width: 100%;
+    height: 100%;
 }
 
 .vertical-line {
@@ -39,4 +128,41 @@ svg {
     stroke-linecap: round;
     stroke: #0b0;
     fill: none;
+}
+
+.train-line {
+    /* stroke: black; */
+    stroke-width: 0.3mm;
+    stroke-linecap: round;
+    cursor: pointer;
+    fill: none;
+}
+
+.train-line.thick {
+    stroke-width: 0.6mm;
+}
+
+.train-line:hover {
+    stroke-width: 0.6mm;
+}
+
+.train-line.thick:hover {
+    stroke-width: 1.2mm;
+}
+
+.train-line.highlighted {
+    stroke-width: 0.6mm;
+    opacity: 0.5;
+}
+
+.train-line.thick.highlighted {
+    stroke-width: 1.2mm;
+}
+
+.line-id-text {
+    font-size: 10px;
+}
+
+.highlighted-text {
+    font-size: 16px;
 }

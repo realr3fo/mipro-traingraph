@@ -183,14 +183,14 @@ public class LiveTrainService {
         for (Train liveTrain : liveTrains) {
             Long trainNumber = liveTrain.getTrainNumber();
             if (!(trainNumber >= 8000 && trainNumber <= 8999 || trainNumber >= 900 && trainNumber <= 999
-                    || trainNumber > 10000 && trainNumber < 11000)) {
+                    || trainNumber > 10000 && trainNumber < 20000)) {
                 continue;
             }
             String trainCategory = liveTrain.getTrainCategory();
             String trainColor = "rgb(0, 68, 0)";
             if (trainCategory.equals("Long-distance")) {
                 trainColor = "rgb(255, 0, 0)";
-            }
+        }
             CustomLiveTrain filteredTrain = new CustomLiveTrain(liveTrain.getTrainNumber(), new ArrayList<>(),
                     new ArrayList<>(), new ArrayList<>(),
                     new ArrayList<>(), trainColor);
