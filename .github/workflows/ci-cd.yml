@@ -39,10 +39,9 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: gcr.io/mipro-traingraph/mipro-traingraph:latest
-
     - name: Deploy to Google Cloud Run
       run: |
-        echo "${{ secrets.GCR_JSON_KEY }}" > gcloud_key.json
+        echo -e "${{ secrets.GCR_JSON_KEY }}" > gcloud_key.json
         gcloud auth activate-service-account --key-file gcloud_key.json
         gcloud config set run/platform managed
         gcloud config set run/region europe-north1
