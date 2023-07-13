@@ -1,6 +1,8 @@
 # Mipro Traingraph
 
-Mipro Traingraph is a Java Spring Boot application that provides a graphical representation of trains running between Helsinki and Leppävaara stations. It fetches live data from the rata.digitraffic.fi API to display train schedules and travel times on a graph.
+Access it [here!](https://mipro-traingraph-kuk2uka4xa-lz.a.run.app/trains)
+
+Mipro Traingraph is a Java Spring Boot application that provides a graphical representation of trains running between Helsinki and Leppävaara stations. It fetches live data from the rata.digitraffic.fi API to display train schedules and travel times on a graph. Project is deployed with CI CD to Google cloud platform.
 
 ## Features
 
@@ -15,13 +17,29 @@ Before running the application, make sure you have the following prerequisites i
 
 - Java Development Kit (JDK) 11 or higher
 - Apache Maven
+- Docker
 
-## Installation
+## Installation (with docker)
+1. Build the jar file with maven
+   ```shell
+   mvn clean package
+   ```
+2. Build and compose:
+   ```shell
+   docker build -t mipro-traingraph .
+   docker-compose up
+   ```
+3. Access the application in your web browser
+   ```shell
+   http://localhost:8080
+   ```
+
+## Installation (without docker)
 
 1. Clone the repository:
 
    ```shell
-   git clone <repository-url>
+   git clone https://github.com/realr3fo/mipro-traingraph.git
     ```
 
 2. Navigate to the project directory:
@@ -32,13 +50,11 @@ Before running the application, make sure you have the following prerequisites i
    ```shell
    mvn clean install
    ```
-
-## Usage
-1. Run the application using Maven:
+4. Run the application using Maven:
    ```shell
    mvn spring-boot:run
    ```
-2. Access the application in your web browser
+5. Access the application in your web browser
    ```shell
    http://localhost:8080
    ```
@@ -46,10 +62,11 @@ Before running the application, make sure you have the following prerequisites i
 
 ## Technologies Used
 - Java
+- Javascript
 - Spring Boot
 - Thymeleaf
 - Maven
-- HTML/CSS/JavaScript
+- HTML/CSS
 
 
 ## Snippet
