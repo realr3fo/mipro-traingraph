@@ -53,4 +53,4 @@ Before running the application, make sure you have the following prerequisites i
 
 
 ## Snippet
-// TODO: add snippet
+![Mipro Traingraph page](page.png)
