@@ -45,6 +45,7 @@ jobs:
         gcloud auth activate-service-account --key-file gcloud_key.json
         gcloud config set run/platform managed
         gcloud config set run/region europe-north1
+        gcloud config set project $${{ secrets.GCLOUD_PROJECT_ID}}
         gcloud run deploy mipro-traingraph \
           --image gcr.io/mipro-traingraph/mipro-traingraph:latest \
           --allow-unauthenticated \
