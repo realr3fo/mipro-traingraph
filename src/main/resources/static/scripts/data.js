@@ -14,8 +14,22 @@ export async function fetchDataAndPlot() {
 }
 
 async function fetchTrainData() {
-  const response = await fetch('/live-trains');
-  return response.json();
+  try {
+    const response = await fetch('/live-trains');
+    if (!response.ok) {
+      throw { status: response.status, message: response.statusText };
+    }
+    const data = await response.json();
+    // Your code to process the data and update the frontend goes here
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    if (error instanceof TypeError && error.message === 'Failed to fetch') {
+      alert('Connection refused. Please check your internet connection and try again.');
+    } else {
+      alert('Too many requests. Please wait and try again later.');
+    }
+  }
 }
 
 function plotData(data) {
@@ -27,12 +41,29 @@ function plotData(data) {
     const { actualTimes, scheduledTimes, actualStationCodes, scheduledStationCodes, trainNumber, trainColor } = train;
     const actualTimesLength = actualTimes.length;
     let writeTrainName = true;
+    const drawLinesObject = {
+      currentTime: gridValues.currentTime,
+      timeXValues: gridValues.timeXValues,
+      stationYValues: gridValues.stationYValues,
+      trainName: trainNumber,
+      trainThickness: '',
+      timeValues: [],
+      stationNamesArray: [],
+      writeTrainName: writeTrainName,
+      trainColor: trainColor,
+    };
     if (actualTimesLength > 0) {
-      drawLinesOnTime(gridValues.currentTime, gridValues.timeXValues, gridValues.stationYValues, trainNumber, 'thick', actualTimes, actualStationCodes, writeTrainName, trainColor);
+      drawLinesObject.trainThickness = 'thick';
+      drawLinesObject.timeValues = actualTimes;
+      drawLinesObject.stationNamesArray = actualStationCodes;
+      drawLinesOnTime(drawLinesObject);
       if (actualTimesLength > 2) {
-        writeTrainName = false;
+        drawLinesObject.writeTrainName = false;
       }
     }
-    drawLinesOnTime(gridValues.currentTime, gridValues.timeXValues, gridValues.stationYValues, trainNumber, 'thin', scheduledTimes, scheduledStationCodes, writeTrainName, trainColor);
+    drawLinesObject.trainThickness = 'thin';
+    drawLinesObject.timeValues = scheduledTimes;
+    drawLinesObject.stationNamesArray = scheduledStationCodes;
+    drawLinesOnTime(drawLinesObject);
   });
 }

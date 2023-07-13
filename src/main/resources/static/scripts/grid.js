@@ -11,17 +11,15 @@ export function createGrid() {
   svg.setAttribute('height', height);
 
   // Calculate grid dimensions
-  const numStations = 9;
   const startY = height * 0.1;
   const endY = height * 0.9;
-  const stationSpacing = (endY - startY) / (numStations - 1);
   const startX = width * 0.1;
   const endX = width * 0.9;
 
-  // Add stations and lines
-  const stations = ['HKI', 'PSL', 'ILA', 'KHK', 'HPL', 'VMO', 'PJM', 'MÄK', 'LPV'];
-  const fullStationNames = ['Helsinki asema', 'Pasila asema', 'Ilmala asema', 'Helsinki Kivihaka', 'Huopalahti', 'Valimo', 'Pitäjänmäki', 'Mäkkylä', 'Leppävaara'];
-  const actualDistances = [0.2, 3.2, 4.4, 4.7, 6.4, 7.5, 8.5, 9.5, 11.2];
+  const dataElement = document.getElementById("data");
+  const stations = JSON.parse(dataElement.dataset.stations);
+  const fullStationNames = JSON.parse(dataElement.dataset.fullStationNames);
+  const actualDistances = JSON.parse(dataElement.dataset.actualDistances);
   const totalDistance = actualDistances[actualDistances.length - 1];
 
   // Prepare arrays for storing station y values and time x values

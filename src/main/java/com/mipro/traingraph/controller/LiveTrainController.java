@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mipro.traingraph.model.CustomLiveTrain;
 import com.mipro.traingraph.service.LiveTrainService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 @Controller
 public class LiveTrainController {
     private final LiveTrainService liveTrainService;
@@ -22,7 +25,8 @@ public class LiveTrainController {
 
     @GetMapping("/live-trains")
     @ResponseBody
-    public List<CustomLiveTrain> getLiveTrainsFilter() throws IOException {
-        return liveTrainService.getLiveTrainsCustom();
+    public ResponseEntity<?> getLiveTrainsFilter() throws IOException {
+        List<CustomLiveTrain> liveTrains = liveTrainService.getLiveTrainsCustom();
+        return new ResponseEntity<>(liveTrains, HttpStatus.OK);
     }
 }

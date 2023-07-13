@@ -1,10 +1,17 @@
 import { createSVGElement, timeToIndex } from './helpers.js';
 
-export function drawLinesOnTime(currentTime, timeXValues, stationYValues, trainName, trainThickness, timeValues, stationNamesArray, writeTrainName, trainColor) {
+export function drawLinesOnTime(drawLinesObject) {
+  const currentTime = drawLinesObject.currentTime;
+  const timeXValues = drawLinesObject.timeXValues;
+  const stationYValues = drawLinesObject.stationYValues;
+  const timeValues = drawLinesObject.timeValues;
+  const stationNamesArray = drawLinesObject.stationNamesArray;
+
   if (stationNamesArray.length === 0) {
     return;
   }
-  const stationNames = ['HKI', 'PSL', 'ILA', 'KHK', 'HPL', 'VMO', 'PJM', 'MÄK', 'LPV'];
+  const dataElement = document.getElementById("data");
+  const stationNames = JSON.parse(dataElement.dataset.stations);
   const timeIndexes = timeValues.map(time => timeToIndex(currentTime, time));
   const stationIndexes = stationNamesArray.map(name => stationNames.indexOf(name));
 
@@ -17,10 +24,19 @@ export function drawLinesOnTime(currentTime, timeXValues, stationYValues, trainN
   const flatPoints = points.flatMap(point => [point.x, point.y]);
 
   // Call drawPolyline with the generated points
-  drawPolyline(flatPoints, trainThickness, trainName, writeTrainName, trainColor);
+  drawPolyline(flatPoints, drawLinesObject);
 }
 
-function drawPolyline(points, lineType, lineId, writeTrainName, trainColor) {
+function drawPolyline(points, drawLinesObject) {
+  const lineType = drawLinesObject.trainThickness;
+  const lineId = drawLinesObject.trainName;
+  const writeTrainName = drawLinesObject.writeTrainName;
+  const trainColor = drawLinesObject.trainColor;
+
+  const allPointsValid = points.every(point => point !== null && typeof point === 'number');
+  if (!allPointsValid) {
+    return;
+  }
   const svg = document.getElementById('graphical-main');
   const polyline = createSVGElement('polyline', {
     points: points.join(','),
@@ -42,13 +58,14 @@ function drawPolyline(points, lineType, lineId, writeTrainName, trainColor) {
           // Calculate the midpoint and angle of rotation for the segment
           const { midPoint, angleInDegrees } = getMidPointAndRotation(startPoint, endPoint);
 
-          // Create a text element and position it at the midpoint of the segment
-          const textElement = createTextElement(lineId, midPoint[0], midPoint[1], trainColor);
+          if (angleInDegrees != null) {
+            // Create a text element and position it at the midpoint of the segment
+            const textElement = createTextElement(lineId, midPoint[0], midPoint[1], trainColor);
+            // Rotate the text element according to the calculated angle
+            textElement.setAttribute('transform', `rotate(${angleInDegrees}, ${midPoint[0]}, ${midPoint[1]})`);
 
-          // Rotate the text element according to the calculated angle
-          textElement.setAttribute('transform', `rotate(${angleInDegrees}, ${midPoint[0]}, ${midPoint[1]})`);
-
-          svg.appendChild(textElement);
+            svg.appendChild(textElement);
+          }
         }
         writeOdd++;
       }

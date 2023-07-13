@@ -46,10 +46,9 @@ export function clearGrid(svg) {
 }
 
 
-let tooltip;
 
 export function showTooltip(event, text) {
-  tooltip = document.createElement('div');
+  const tooltip = document.createElement('div');
   tooltip.textContent = text;
   tooltip.style.position = 'absolute';
   tooltip.style.background = '#f9f9f9';
@@ -61,11 +60,14 @@ export function showTooltip(event, text) {
   tooltip.style.fontFamily = 'Open sans';
   tooltip.style.top = `${event.clientY + 10}px`;
   tooltip.style.left = `${event.clientX + 10}px`;
+  tooltip.setAttribute('id', 'tooltip');
+
 
   document.body.appendChild(tooltip);
 }
 
 export function hideTooltip() {
+  var tooltip = document.getElementById('tooltip');
   if (tooltip) {
     document.body.removeChild(tooltip);
     tooltip = null;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -11,11 +11,11 @@
     <script type="module" src="/scripts/grid.js"></script>
     <script type="module" src="/scripts/lines.js"></script>
     <script type="module" src="/scripts/data.js"></script>
-
 </head>
 
 <body>
     <div id="button-container">
+        <button id="update-grid-button">Update Grid</button>
         <button id="flip-grid-button">Flip Grid</button>
         <button id="source-code-button"
             onclick="window.open('https://github.com/realr3fo/mipro-traingraph', '_blank')">Source Code</button>
@@ -25,6 +25,8 @@
     <div id="description-container">
         <p>Traingraph with trains running currently between Helsinki and Leppävaara stations</p>
     </div>
+    <div id="data" th:data-stations="${stations}" th:data-full-station-names="${fullStationNames}"
+        th:data-actual-distances="${actualDistances}" style="display:none;"></div>
     <div id="graphical-container">
         <div id="svg-wrapper">
             <svg id="graphical-main" xmlns="http://www.w3.org/2000/svg">

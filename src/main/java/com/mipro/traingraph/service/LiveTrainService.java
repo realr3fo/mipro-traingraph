@@ -40,7 +40,6 @@ public class LiveTrainService {
     public LiveTrainService() {
         this.restTemplate = new RestTemplate();
         this.objectMapper = new ObjectMapper();
-        // TODO: get this from stationShortCodeProviders;
         this.stationCodes = new HashSet<>(
                 Arrays.asList("HKI", "PSL", "ILA", "KHK", "HPL", "VMO", "PJM", "M\u00C4K", "LPV"));
     }
@@ -89,9 +88,6 @@ public class LiveTrainService {
                         String jsonResponse = new String(responseBody, StandardCharsets.UTF_8);
                         List<Train> trains = objectMapper.readValue(jsonResponse, new TypeReference<List<Train>>() {
                         });
-
-                        // Iterate over the list and filter out trains where runningCurrently is false
-                        // trains.removeIf(train -> !train.isRunningCurrently());
 
                         // Add the trains to the uniqueTrains set
                         synchronized (uniqueTrains) {
