@@ -20,7 +20,6 @@ async function fetchTrainData() {
       throw { status: response.status, message: response.statusText };
     }
     const data = await response.json();
-    // Your code to process the data and update the frontend goes here
     return data;
   } catch (error) {
     console.error('Error:', error);
