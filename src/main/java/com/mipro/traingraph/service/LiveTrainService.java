@@ -64,7 +64,6 @@ public class LiveTrainService {
         List<CompletableFuture<Void>> futures = new ArrayList<>();
 
         for (String stationCode : stationCodes) {
-            // Replace "HKI" in the URL with the current station code
             String apiUrl = "https://rata.digitraffic.fi/api/v1/live-trains/station/" + stationCode
                     + "?minutes_before_departure=30&minutes_after_departure=30&minutes_before_arrival=30&minutes_after_arrival=30&include_nonstopping=true";
 
@@ -132,7 +131,6 @@ public class LiveTrainService {
         ZoneId helsinkiZone = ZoneId.of("Europe/Helsinki");
         ZonedDateTime currentTimeInHelsinki = ZonedDateTime.now(helsinkiZone);
         LocalDateTime currentTime = currentTimeInHelsinki.toLocalDateTime();
-        // LocalDateTime currentTime = LocalDateTime.now();
         LocalDateTime thirtyMinutesAgo = currentTime.minus(30, ChronoUnit.MINUTES);
         LocalDateTime thirtyMinutesLater = currentTime.plus(30, ChronoUnit.MINUTES);
 
